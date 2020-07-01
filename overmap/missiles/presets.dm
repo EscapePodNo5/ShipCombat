@@ -1,0 +1,2 @@
+/obj/structure/missile/test
+	equipment = list(/obj/item/missile_equipment/targeting_package/point, /obj/item/missile_equipment/thruster, /obj/item/missile_equipment/payload/explosive, /obj/item/missile_equipment/autoarm)

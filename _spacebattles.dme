@@ -1,0 +1,27 @@
+#ifndef MODPACK_SHIPBATTLES
+#define MODPACK_SHIPBATTLES
+// BEGIN_INCLUDE
+#include "unsorted/helpers.dm"
+#include "ship_combat.dm"
+#include "overmap/projectiles.dm"
+#include "overmap/missiles/missile.dm"
+#include "overmap/missiles/presets.dm"
+#include "overmap/missiles/equipment/equipment.dm"
+#include "overmap/missiles/equipment/payload.dm"
+#include "overmap/missiles/equipment/thruster.dm"
+#include "overmap/missiles/equipment/targeting_package.dm"
+#include "overmap/missiles/equipment/iff.dm"
+#include "overmap/missiles/equipment/modules/autoarm.dm"
+#include "overmap/missiles/equipment/modules/cargo.dm"
+#include "overmap/missiles/equipment/modules/passenger.dm"
+#include "overmap/missiles/equipment/modules/sensor_probe.dm"
+#include "overmap/missiles/equipment/thrusters/antimissile.dm"
+#include "overmap/missiles/equipment/thrusters/planetfall.dm"
+#include "overmap/missiles/equipment/thrusters/pointman.dm"
+#include "overmap/missiles/equipment/warheads/antimissile.dm"
+#include "overmap/missiles/equipment/warheads/antishield.dm"
+#include "overmap/missiles/equipment/warheads/emp.dm"
+#include "overmap/missiles/equipment/warheads/antiship.dm"
+// END_INCLUDE
+#endif
+
