@@ -7,6 +7,7 @@
 	var/sector_flags = OVERMAP_SECTOR_KNOWN // technically in space, but you can't visit the missile during its flight
 
 	var/obj/structure/missile/actual_missile = null
+	var/obj/effect/overmap/visitable/host_ship = null
 
 	var/walking = FALSE // walking towards something on the overmap?
 	var/moving = FALSE // is the missile moving on the overmap?
@@ -20,13 +21,19 @@
 	var/target_y
 	var/obj/effect/overmap/target
 
-	var/speedlimit = 20
-	var/accellimit = 20
+	var/speedlimit = 5
+	var/accellimit = 5
+
+	var/launch_time //the time we were launched.
+	var/self_destruct_time //If we haven't hit our target after x amount of time after launch, self destruct to avoid cluttering overmap.
+	var/self_destruct_delay = 5 MINUTES
 
 /obj/effect/overmap/projectile/Initialize(var/maploading, var/start_turf)
 	. = ..()
 	forceMove(start_turf)
 	START_PROCESSING(SSobj, src)
+	launch_time = world.time
+	self_destruct_time = world.time + self_destruct_delay
 
 /obj/effect/overmap/projectile/Destroy()
 	if(!QDELETED(actual_missile))
@@ -70,6 +77,9 @@
 
 /obj/effect/overmap/projectile/Process()
 	// Whether overmap movement occurs is controlled by the missile itself
+	if(QDELETED(src))
+		return
+
 	if(!moving)
 		return
 
@@ -84,6 +94,9 @@
 
 	if(movement)
 		movement.do_overmap_movement()
+
+	if(world.time > self_destruct_time)
+		qdel(src)
 
 	update_icon()
 
@@ -131,16 +144,15 @@
 		actual_missile.enter_level(pick(winner.map_z))
 
 /obj/effect/overmap/projectile/on_update_icon()
+	if(movement)
+		movement.handle_pixel_movement()
 	icon_state = "projectile"
-	if(walking)
+	if(!is_still())
 		icon_state += "_moving"
 
 	if(dangerous)
 		icon_state += "_danger"
 	set_dir(get_heading())
-
-	if(movement)
-		movement.handle_pixel_movement()
 
 /obj/effect/overmap/projectile/get_vessel_mass()
 	var/total_mass

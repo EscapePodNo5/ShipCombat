@@ -1,6 +1,6 @@
 /obj/item/missile_equipment/iff
 	name = "IFF module"
-	desc = "A simple challenge-response transponder to identify missiles. Remember, do not leave sticky notes with your IFF codes laying around."
+	desc = "A simple challenge-response transponder to identify missiles - and for missiles to identify ships with. Remember, do not leave sticky notes with your IFF codes laying around."
 	icon_state = "iff"
 	var/random_iff = FALSE
 	var/iff_code //Null initially, just to prevent fuckery - assuming players haven't set the ship's IFF. If they have, well. PDCs will try to shoot down their own missiles.

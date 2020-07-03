@@ -27,7 +27,7 @@
 		M.detonate(impact_turf)
 
 	return null
-
+/*
 /obj/item/missile_equipment/thruster/planet/attackby(var/obj/item/I, var/mob/user)
 	..()
 
@@ -48,3 +48,4 @@
 		planetary_target = tgt
 		to_chat(user, SPAN_NOTICE("Planetary target successfully set to [target_x]-[target_y]."))
 		return
+*/

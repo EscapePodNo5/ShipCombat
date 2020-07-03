@@ -26,6 +26,15 @@
 	var/obj/effect/overmap/projectile/overmap_missile = null
 	var/frame_mass = 10 //tons.
 
+/obj/structure/missile/examine(mob/user)
+	. = ..()
+	if(LAZYLEN(equipment))
+		to_chat(user, SPAN_NOTICE("It has these modules mounted:"))
+	for(var/obj/item/missile_equipment/E in equipment)
+		to_chat(user, SPAN_NOTICE("\icon[E] [E.name]"))
+	if(active)
+		to_chat(user,SPAN_DANGER("A status light indicates that it is armed."))
+
 /obj/structure/missile/proc/get_additional_info()
 	var/list/info = list("Detected components:<ul>")
 	for(var/obj/item/missile_equipment/E in equipment)
@@ -128,6 +137,7 @@
 			equipment += E
 			E.missile = src
 			to_chat(user, "You install \the [E] into \the [src].")
+			E.on_install()
 
 			update_icon()
 			return
@@ -169,6 +179,7 @@
 	overmap_missile.set_missile(src)
 	overmap_missile.recalc_mass()
 	overmap_missile.SetName(overmap_name)
+	overmap_missile.host_ship = start_object
 
 	for(var/obj/item/missile_equipment/E in equipment)
 		E.on_missile_activated(overmap_missile)
@@ -220,10 +231,6 @@
 		log_and_message_admins("A dangerous missile has entered z level [z_level] (<A HREF='?_src_=holder;adminplayerobservecoodjump=1;X=[x];Y=[y];Z=[z]'>JMP</a>)")
 	forceMove(start)
 
-	// if we enter into a dense place, just detonate immediately
-	if(start.contains_dense_objects())
-		detonate()
-		return
 
 	// let missile equipment decide a target
 	var/list/goal_coords = null
@@ -241,3 +248,17 @@
 			return
 
 	walk(src, heading, 1)
+
+/obj/structure/missile/proc/has_iff()
+	for(var/obj/item/missile_equipment/E in equipment)
+		if(istype(E, /obj/item/missile_equipment/iff))
+			return TRUE
+		else
+			continue
+
+/obj/structure/missile/proc/get_iff_code()
+	if(!has_iff())
+		return
+
+	for(var/obj/item/missile_equipment/iff/E in equipment)
+		return E.iff_code

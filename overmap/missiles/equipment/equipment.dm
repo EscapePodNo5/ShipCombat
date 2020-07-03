@@ -39,3 +39,6 @@
 // Called by the missile when it detonates
 /obj/item/missile_equipment/proc/on_trigger(var/atom/triggerer)
 	return
+
+/obj/item/missile_equipment/proc/on_install()
+	return

@@ -3,6 +3,8 @@
 // BEGIN_INCLUDE
 #include "unsorted/helpers.dm"
 #include "ship_combat.dm"
+#include "overwrites.dm"
+#include "_defines.dm"
 #include "overmap/projectiles.dm"
 #include "overmap/missiles/missile.dm"
 #include "overmap/missiles/presets.dm"
@@ -11,10 +13,13 @@
 #include "overmap/missiles/equipment/thruster.dm"
 #include "overmap/missiles/equipment/targeting_package.dm"
 #include "overmap/missiles/equipment/iff.dm"
+#include "overmap/missiles/equipment/remote_guidance.dm"
 #include "overmap/missiles/equipment/modules/autoarm.dm"
 #include "overmap/missiles/equipment/modules/cargo.dm"
 #include "overmap/missiles/equipment/modules/passenger.dm"
 #include "overmap/missiles/equipment/modules/sensor_probe.dm"
+#include "overmap/missiles/equipment/targeting/point.dm"
+#include "overmap/missiles/equipment/targeting/ship_tracker.dm"
 #include "overmap/missiles/equipment/thrusters/antimissile.dm"
 #include "overmap/missiles/equipment/thrusters/planetfall.dm"
 #include "overmap/missiles/equipment/thrusters/pointman.dm"
@@ -22,6 +27,7 @@
 #include "overmap/missiles/equipment/warheads/antishield.dm"
 #include "overmap/missiles/equipment/warheads/emp.dm"
 #include "overmap/missiles/equipment/warheads/antiship.dm"
+#include "machines/ecm.dm"
 // END_INCLUDE
 #endif
 
